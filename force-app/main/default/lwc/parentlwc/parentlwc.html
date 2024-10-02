@@ -1,0 +1,28 @@
+<template>
+    <lightning-card icon-name="standard:account" variant="base">
+      <div slot="title">
+          Parent Component
+      </div>
+      <div class="slds-var-m-around_medium">
+        <c-tile title='Analyzed Log'> 
+          <div slot="summary-body">
+            <c-treegridtest></c-treegridtest>
+          </div>
+        </c-tile>
+      </div>
+      <div class="slds-var-m-around_medium">
+        <c-tile title='Raw Debug Log Preview'> 
+          <div slot="summary-body">
+            <c-datatable table-data={arr}></c-datatable>
+          </div>
+        </c-tile>
+      </div>
+      <div class="slds-var-m-around_medium">
+        <c-tile title="Execute Anonymous Code">
+          <div slot="summary-body">
+            <c-code-snippet></c-code-snippet>
+          </div>
+        </c-tile>
+      </div>
+    </lightning-card>
+</template>

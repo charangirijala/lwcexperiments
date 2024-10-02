@@ -1,0 +1,8 @@
+.slds-table_bordered{
+    border: none !important;
+}
+
+.slds-table_bordered tbody td{
+    border-top:none !important;
+    border-bottom: 1px solid var(--slds-g-color-border-base-1, #e5e5e5);
+}

@@ -1,0 +1,65 @@
+<!-- sldsValidatorIgnore -->
+<template>
+    <ul class="slds-timeline">
+        <li>
+            <div class={codeUnitClass}>
+                <span class="slds-assistive-text">Code/Method Unit</span>
+                <div class="slds-media">
+                    <div class="slds-media__figure">
+                        <button class="slds-button slds-button_icon" onclick={toggleUnit} title="Toggle the Code/Method Unit" aria-controls="code-unit-expanded" aria-expanded={isOpen}>
+                            <svg class="slds-button__icon slds-timeline__details-action-icon" aria-hidden={isClosed}>
+                                <use xlink:href="/assets/icons/utility-sprite/svg/symbols.svg#switch"></use>
+                            </svg>
+                            <span class="slds-assistive-text">Toggle the Code/Method Unit</span>
+                        </button>
+                        <div class="slds-icon_container slds-icon-standard-task slds-timeline__icon" title="Code/Method unit">
+                            <svg class="slds-icon slds-icon_small" aria-hidden={isClosed}>
+                                <use xlink:href="/assets/icons/standard-sprite/svg/symbols.svg#code_playground"></use>
+                            </svg>
+                        </div>
+                    </div>
+                    <div class="slds-media__body">
+                        <div class="slds-grid slds-grid_align-spread slds-timeline__trigger">
+                            <div class="slds-grid slds-grid_vertical-align-center slds-truncate_container_75 slds-no-space">
+                                <!-- TITLE OF CODEUNIT -->
+                                <h3 class="slds-truncate" title="Review proposals for EBC deck with larger team and have marketing review this">
+                                    <a href="#">
+                                    <strong>Review proposals for EBC deck with larger team and have marketing review this</strong>
+                                    </a>
+                                </h3>
+                                <!-- ANY ICON IF NEEDED -->
+                                <div class="slds-no-flex">
+                                    <span class="slds-icon_container slds-icon-utility-rotate" title="Recurring Task">
+                                    <svg class="slds-icon slds-icon_xx-small slds-icon-text-default slds-m-left_x-small" aria-hidden={isOpen}>
+                                    <use xlink:href="/assets/icons/utility-sprite/svg/symbols.svg#rotate"></use>
+                                    </svg>
+                                    <span class="slds-assistive-text">Recurring Task</span>
+                                    </span>
+                                </div>
+                            </div>
+                            <div class="slds-timeline__actions slds-timeline__actions_inline">
+                                <p class="slds-timeline__date">Lines 9-25</p>
+                                <button class="slds-button slds-button_icon slds-button_icon-border-filled slds-button_icon-x-small" aria-haspopup="true" title="More Options for this item">
+                                    <svg class="slds-button__icon" aria-hidden={isOpen}>
+                                    <use xlink:href="/assets/icons/utility-sprite/svg/symbols.svg#down"></use>
+                                    </svg>
+                                    <span class="slds-assistive-text">More Options for this item</span>
+                                </button>
+                            </div>
+                        </div>
+                        <!-- SOME EXTRA LINE below Title -->
+                        <!-- <p class="slds-var-m-horizontal_xx-small">
+                            <a href="#">You</a> created a task with
+                            <a href="#">Charlie Gomez</a>
+                        </p> -->
+                        <article class="slds-box slds-timeline__item_details slds-theme_shade slds-m-top_x-small slds-m-horizontal_xx-small slds-p-around_x-small" id="task-item-expanded-65">
+                            <div class="slds-var-p-around_small">
+                                <c-logline type="VARIN" var-name="testVar" var-type="String" line-number='[40]' is-var-static=true is-var-accessible=false></c-logline>
+                            </div>
+                        </article>
+                    </div>
+                </div>
+            </div>
+        </li>
+    </ul>
+</template>

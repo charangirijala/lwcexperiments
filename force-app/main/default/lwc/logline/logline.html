@@ -1,0 +1,59 @@
+<template>
+    <!-- VARIN -->
+     <template lwc:if={VARIN}>
+        <div class="VARIN">
+            <table class="slds-table slds-table_cell-buffer slds-table_bordered slds-table_col-bordered slds-table_striped" aria-label="logline">
+                <tbody>
+                    <tr class="slds-hint-parent">
+                        <td class="slds-text-body_small slds-cell-wrap">
+                          <div class="slds-line-clamp" title="LogLine">
+                            <strong>[10] </strong> 
+                            <em>Variable Initialized: </em> 
+                            <span class="slds-text-font_monospace"><strong>String LogLineValue</strong></span>
+                            <c-badge value="Static" margin-side="xxx-small" type="slds-badge_inverse"></c-badge>
+                            <c-badge value="Not Accessible" margin-side="xxx-small" type="slds-theme_error"></c-badge>
+                          </div>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+      </template>
+     <!-- VARAS -->
+      <template lwc:if={VARIN}>
+        <div class="VARAS">
+          <table class="slds-table slds-table_cell-buffer slds-table_bordered" aria-label="logline">
+            <tbody>
+                <tr class="slds-hint-parent">
+                    <td class="slds-text-body_small slds-cell-wrap">
+                      <div class="slds-line-clamp" title="LogLine">
+                        <strong>[10] </strong> 
+                        <em>Variable Assigned: </em> 
+                        <span class="slds-text-font_monospace"><strong>Temp = "AbecString"</strong></span>
+                      </div>
+                    </td>
+                </tr>
+            </tbody>
+          </table>
+        </div>
+      </template>
+     <!-- DEBUG -->
+     <template lwc:if={VARIN}>
+      <div class="DEBUG">
+        <table class="slds-table slds-table_cell-buffer slds-table_bordered" aria-label="logline">
+          <tbody>
+            <tr>
+              <td class="slds-text-body_small slds-cell-wrap">
+                <div class="slds-line-clamp" title="LogLine">
+                  <strong>[103] </strong> 
+                  <em>DEBUG Statement: </em> 
+                  <c-badge value="DEBUG" margin-side="xxx-small" type="slds-badge_inverse"></c-badge>
+                  <span class="slds-text-font_monospace"><strong>LEVEL ONE CHECK::::NO PATTERN MATCHED FOR THE LINE ;;;</strong></span>
+                </div>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+     </template>
+</template>
