@@ -1,18 +1,21 @@
-import { LightningElement, track } from "lwc";
+import { LightningElement, track, api } from "lwc";
 let IdBase = Math.floor(Math.random() * (99999 - 10000 + 1)) + 10000;
 const setSize = 100;
 const columns = [
   {
     fieldName: "name",
-    label: "Name"
+    label: "Name",
+    classComb: "slds-is-resizable slds-cell_action-mode name-col"
   },
   {
     fieldName: "type",
-    label: "Type"
+    label: "Type",
+    classComb: "slds-is-resizable slds-cell_action-mode type-col"
   },
   {
     fieldName: "hasError",
-    label: "hasError"
+    label: "hasError",
+    classComb: "slds-is-resizable slds-cell_action-mode error-col"
   }
 ];
 class CUHierarchy {
@@ -827,8 +830,34 @@ const codeunits = [
 ];
 
 export default class Treegridtest extends LightningElement {
+  idLimitMin = IdBase;
+  idLimitMax;
   @track columns = columns;
   @track treeNodes = [];
+  @track test = [
+    {
+      a: "102",
+      b: false
+    }
+  ];
+  logViewCol = 6;
+  currentLogId;
+  setLogViewCol() {
+    this.logViewCol = 12;
+  }
+  get detailedLogViewDisplay() {
+    return this.logViewCol === 6 ? true : false;
+  }
+  openLogViewer(event) {
+    const codeUnitId = event.currentTarget.dataset.unqid;
+    console.log(
+      "CodeUnit clicked, Id: ",
+      codeUnitId,
+      " Opening detailed log for this Id"
+    );
+    this.logViewCol = 6;
+    this.currentLogId = codeUnitId;
+  }
   cuInHierarchy = [];
   connectedCallback() {
     //prepare cuInHierarchy from codeunit data
@@ -844,26 +873,16 @@ export default class Treegridtest extends LightningElement {
       this.generateTreeNodes(row, level, posinset, "");
       posinset++;
     });
-
-    //sort the treenodes
-    this.treeNodes.sort((a, b) => {
-      if (a.level < b.level) {
-        return -1;
-      } else if (a.level > b.level) {
-        return 1;
-      } else {
-        if (a.posinset < b.posinset) {
-          return -1;
-        } else if (a.posinset > b.posinset) {
-          return 1;
-        }
-      }
-    });
-
-    console.log(
-      "Final Data to be rendered as tree grid: ",
-      JSON.stringify(this.treeNodes)
-    );
+    this.idLimitMax = this.idLimitMin + this.treeNodes.length;
+  }
+  renderTrack = false;
+  renderedCallback() {
+    if (this.renderTrack) {
+      console.log("Rendering again");
+    } else {
+      this.renderTrack = true;
+      console.log("First render");
+    }
   }
   generateTreeNodes(row, level, posinset, parentId) {
     const fRow = new TreeNode(
@@ -892,13 +911,12 @@ export default class Treegridtest extends LightningElement {
     fRow.hasChild = true;
     const children = row.children;
     let idx = 1;
+    this.treeNodes.push(fRow);
     children.forEach((child) => {
       // console.log("Parent id", fRow.parents);
       this.generateTreeNodes(child, level + 1, idx, fRow.parents + row.Id);
       idx++;
     });
-
-    this.treeNodes.push(fRow);
   }
   getChildren(elss, parent) {
     //baseConditon
@@ -924,6 +942,33 @@ export default class Treegridtest extends LightningElement {
         parent.children.push(res);
         this.getChildren(unit.methodUnit.executedLinesAndSubUnits, res);
         // console.log("Child node res: ", res);
+      }
+    });
+  }
+
+  get treeNodeRenderer() {
+    console.log("Getting latest verison");
+    return this.treeNodes;
+  }
+  handleToggle(event) {
+    this.test[0].a = this.test[0].a === "102" ? "103" : "102";
+    // console.log(JSON.stringify(this.test));
+    const element = event.target;
+    const id = element.dataset.id;
+    const isExpanded = element.dataset.expanded;
+    console.log("Data Id:", id, " IsExpanded: ", isExpanded);
+    this.treeNodes.forEach((row) => {
+      if (row.parents.includes(id)) {
+        if (isExpanded === "true") {
+          row.classComb = "slds-hint-parent slds-hide";
+          row.isExpanded = false;
+        } else {
+          row.classComb = "slds-hint-parent";
+          row.isExpanded = true;
+        }
+      }
+      if (row.Id.toString() === id) {
+        row.isExpanded = !row.isExpanded;
       }
     });
   }
