@@ -39,6 +39,7 @@ class TreeNode {
   hasError;
   hasChild;
   isExpanded;
+  isSelected;
   level;
   posinset;
   setsize;
@@ -51,6 +52,7 @@ class TreeNode {
     this.hasError = hasError;
     this.hasChild = false;
     this.isExpanded = true;
+    this.isSelected = false;
     this.level = 1;
     this.posinset = 1;
     this.setsize = setSize;
@@ -842,6 +844,7 @@ export default class Treegridtest extends LightningElement {
   ];
   logViewCol = 6;
   currentLogId;
+  currentLogIdx = 0;
   setLogViewCol() {
     this.logViewCol = 12;
   }
@@ -857,6 +860,15 @@ export default class Treegridtest extends LightningElement {
     );
     this.logViewCol = 6;
     this.currentLogId = codeUnitId;
+  }
+  setSelectedTreeNode(event) {
+    this.test[0].a = this.test[0].a === "102" ? "103" : "102";
+    console.log("Selected Log idx: ", event.detail);
+    if (this.treeNodes !== null && this.treeNodes !== undefined) {
+      this.treeNodes[this.currentLogIdx].isSelected = false;
+      this.currentLogIdx = event.detail;
+      this.treeNodes[this.currentLogIdx].isSelected = true;
+    }
   }
   cuInHierarchy = [];
   connectedCallback() {

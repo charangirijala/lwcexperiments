@@ -1,13 +1,8 @@
 <!-- sldsValidatorIgnore -->
 <template>
-  <lightning-layout vertical-align="stretch" multiple-rows>
-    <lightning-layout-item
-      flexibility="auto"
-      size="12"
-      large-device-size={logViewCol}
-      medium-device-size="12"
-      small-device-size="12"
-      ><template for:each={test} for:item="t">
+  <c-splitscreen>
+    <div slot="left-content">
+      <template for:each={test} for:item="t">
         <div key={t.a}>{t.a} {t.b}</div>
       </template>
       <table
@@ -97,12 +92,22 @@
                 </template>
                 <div class="slds-truncate align-with-icon" title={node.name}>
                   <button
-                    class="slds-button"
+                    class="slds-button slds-text-body_small"
                     data-unqid={node.Id}
                     onclick={openLogViewer}
                     tabindex="-1"
                     title="Open Detailed View"
                   >
+                    <template lwc:if={node.isSelected}>
+                      <svg
+                        class="slds-button__icon slds-button__icon_left"
+                        aria-hidden="true"
+                      >
+                        <use
+                          xlink:href="/assets/icons/utility-sprite/svg/symbols.svg#chevronright"
+                        ></use>
+                      </svg>
+                    </template>
                     <span class="font-monospace">{node.name}</span>
                   </button>
                 </div>
@@ -121,23 +126,16 @@
           </template>
         </tbody>
       </table>
-    </lightning-layout-item>
-    <template lwc:if={detailedLogViewDisplay}>
-      <lightning-layout-item
-        flexibility="auto"
-        size="12"
-        large-device-size={logViewCol}
-        medium-device-size="12"
-        small-device-size="12"
-      >
-        <c-detailed-log-viewer
-          oncloselogviewer={setLogViewCol}
-          log-id={currentLogId}
-          logs-master-data={treeNodes}
-          id-limit-min={idLimitMin}
-          id-limit-max={idLimitMax}
-        ></c-detailed-log-viewer>
-      </lightning-layout-item>
-    </template>
-  </lightning-layout>
+    </div>
+    <div slot="right-content">
+      <c-detailed-log-viewer
+        oncloselogviewer={setLogViewCol}
+        onselectedid={setSelectedTreeNode}
+        log-id={currentLogId}
+        logs-master-data={treeNodes}
+        id-limit-min={idLimitMin}
+        id-limit-max={idLimitMax}
+      ></c-detailed-log-viewer>
+    </div>
+  </c-splitscreen>
 </template>

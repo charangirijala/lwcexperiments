@@ -5,14 +5,31 @@ export default class DetailedLogViewer extends LightningElement {
   @api idLimitMax;
   @api logId;
   @api logsMasterData;
-  lowerLimitReached = false;
+  lowerLimitReached = true;
   upperLimitReached = false;
   closeLogViewer() {
     console.log("Closing the viewer");
     this.dispatchEvent(new CustomEvent("closelogviewer"));
   }
+  recheckLimits() {
+    const id = parseInt(this.logId);
+    console.log("Id valueS: ", id);
+    if (id > this.idLimitMin && id < this.idLimitMax) {
+      if (this.lowerLimitReached === true || this.upperLimitReached === true) {
+        this.lowerLimitReached = false;
+        this.upperLimitReached = false;
+        console.log(
+          "Entered ambigous condition resetting the limits lowerLimitReached: ",
+          this.lowerLimitReached,
+          " upperLimitReached: ",
+          this.upperLimitReached
+        );
+      }
+    }
+  }
   renderedCallback() {
     console.log("Rendering detailedViewer for Id:", this.logId);
+    this.recheckLimits();
   }
   handleForward() {
     let nextLogId = parseInt(this.logId) + 1;
@@ -63,6 +80,8 @@ export default class DetailedLogViewer extends LightningElement {
       const temp = size + (this.idLimitMin - parseInt(this.logId));
       const idx = size - temp;
       console.log("LogHeaderDetails calculated: ", this.logsMasterData[idx]);
+      console.log("pass selected Id index to parent");
+      this.dispatchEvent(new CustomEvent("selectedid", { detail: idx }));
       return this.logsMasterData[idx];
     }
     if (
@@ -73,6 +92,7 @@ export default class DetailedLogViewer extends LightningElement {
       this.logId = this.idLimitMin;
       return this.logsMasterData[0];
     }
+
     return undefined;
   }
 }
