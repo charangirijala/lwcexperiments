@@ -873,7 +873,7 @@ export default class Treegridtest extends LightningElement {
       this.generateTreeNodes(row, level, posinset, "");
       posinset++;
     });
-    this.idLimitMax = this.idLimitMin + this.treeNodes.length;
+    this.idLimitMax = this.idLimitMin + this.treeNodes.length - 1;
   }
   renderTrack = false;
   renderedCallback() {

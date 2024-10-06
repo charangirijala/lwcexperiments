@@ -5,9 +5,14 @@ export default class DetailedLogViewer extends LightningElement {
   @api idLimitMax;
   @api logId;
   @api logsMasterData;
+  lowerLimitReached = false;
+  upperLimitReached = false;
   closeLogViewer() {
     console.log("Closing the viewer");
     this.dispatchEvent(new CustomEvent("closelogviewer"));
+  }
+  renderedCallback() {
+    console.log("Rendering detailedViewer for Id:", this.logId);
   }
   handleForward() {
     let nextLogId = parseInt(this.logId) + 1;
@@ -19,9 +24,22 @@ export default class DetailedLogViewer extends LightningElement {
       " idLimitMax",
       this.idLimitMax
     );
+    if (nextLogId === this.idLimitMax) {
+      this.upperLimitReached = true;
+    }
+    if (nextLogId > this.idLimitMin && nextLogId < this.idLimitMax) {
+      this.upperLimitReached = false;
+      this.lowerLimitReached = false;
+    }
+    this.logId = nextLogId.toString();
   }
   handleBackward() {
-    let prevLogId = parseInt(this.logId) - 1;
+    const logid = parseInt(this.logId);
+    if (logid === this.idLimitMin) {
+      this.lowerLimitReached = true;
+      return;
+    }
+    const prevLogId = logid - 1;
     console.log(
       "changed the logViewer to prev treenode prevLogId:",
       prevLogId,
@@ -30,21 +48,31 @@ export default class DetailedLogViewer extends LightningElement {
       " idLimitMax",
       this.idLimitMax
     );
+    if (prevLogId === this.idLimitMin) {
+      this.lowerLimitReached = true;
+    }
+    if (prevLogId > this.idLimitMin && prevLogId < this.idLimitMax) {
+      this.upperLimitReached = false;
+      this.lowerLimitReached = false;
+    }
+    this.logId = prevLogId.toString();
   }
   get LogHeaderDetails() {
     if (this.logId) {
-      const treenode = this.logsMasterData.find((treenode) => {
-        return treenode.Id.toString() === this.logId;
-      });
-      if (treenode === undefined) {
-        console.log("No results found");
-      } else {
-        console.log("TreeNode name: ", treenode.name);
-      }
-
-      return treenode;
+      const size = this.idLimitMax - this.idLimitMin;
+      const temp = size + (this.idLimitMin - parseInt(this.logId));
+      const idx = size - temp;
+      console.log("LogHeaderDetails calculated: ", this.logsMasterData[idx]);
+      return this.logsMasterData[idx];
     }
-
+    if (
+      (this.logId === undefined || this.logId === null) &&
+      this.logsMasterData.length > 0
+    ) {
+      this.lowerLimitReached = true;
+      this.logId = this.idLimitMin;
+      return this.logsMasterData[0];
+    }
     return undefined;
   }
 }

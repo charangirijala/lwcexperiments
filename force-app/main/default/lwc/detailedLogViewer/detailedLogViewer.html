@@ -34,6 +34,7 @@
             variant="border-inverse"
             title="back"
             onclick={handleBackward}
+            disabled={lowerLimitReached}
           ></lightning-button-icon>
           <h2
             class="slds-text-heading_small slds-show_inline-block heading slds-var-m-horizontal_small"
@@ -50,6 +51,7 @@
             variant="border-inverse"
             title="Next CodeUnit"
             onclick={handleForward}
+            disabled={upperLimitReached}
           ></lightning-button-icon>
         </div>
       </lightning-layout-item>
