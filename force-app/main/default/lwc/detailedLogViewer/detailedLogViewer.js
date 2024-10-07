@@ -5,6 +5,7 @@ export default class DetailedLogViewer extends LightningElement {
   @api idLimitMax;
   @api logId;
   @api logsMasterData;
+  @api logLinesData;
   lowerLimitReached = true;
   upperLimitReached = false;
   closeLogViewer() {
@@ -28,8 +29,24 @@ export default class DetailedLogViewer extends LightningElement {
     }
   }
   renderedCallback() {
-    console.log("Rendering detailedViewer for Id:", this.logId);
+    console.log(
+      "Rendering detailedViewer for Id:",
+      this.logId,
+      "Log Lines data: ",
+      this.logLinesData
+    );
     this.recheckLimits();
+  }
+  get LogDataForId() {
+    if (this.logLinesData !== null && this.logLinesData !== undefined) {
+      const parsedId = parseInt(this.logId);
+      if (this.logLinesData.has(parsedId)) {
+        return this.logLinesData.get(parsedId);
+      }
+      console.log("LogLinesData is null or undefined");
+    }
+
+    return undefined;
   }
   handleForward() {
     let nextLogId = parseInt(this.logId) + 1;

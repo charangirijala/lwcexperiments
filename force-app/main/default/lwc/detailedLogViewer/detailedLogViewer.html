@@ -74,5 +74,13 @@
         </div>
       </lightning-layout-item>
     </lightning-layout>
+    <div class="logs-content">
+      <template lwc:if={LogDataForId}>
+        <template for:each={LogDataForId} for:item="line">
+          <c-logline log-line={line} key={line.Id}></c-logline>
+        </template>
+      </template>
+      <template lwc:else>Oops!! No Data for this unit</template>
+    </div>
   </div>
 </template>

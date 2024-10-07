@@ -1,6 +1,6 @@
 .split-screen {
   display: flex;
-  height: 300px;
+  height: 65vh;
 }
 
 .left-section,

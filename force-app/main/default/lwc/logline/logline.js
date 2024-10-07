@@ -1,25 +1,26 @@
-import { LightningElement,api } from 'lwc';
+import { LightningElement, api } from "lwc";
 
 export default class Logline extends LightningElement {
-    @api type;
-    @api varName;
-    @api varType;
-    @api lineNumber;
-    @api isVarStatic;
-    @api isVarAccessible;
+  @api logLine;
 
-    get VARIN(){
-        if(this.type==='VARIN') return true;
-        return false;
+  get VARIN() {
+    if (this.logLine.logLineData) {
+      if (this.logLine.logLineData.type === "VARIN") return true;
     }
+    return false;
+  }
 
-    get VARAS(){
-        if(this.type==='VARAS') return true;
-        return false;
+  get VARAS() {
+    if (this.logLine.logLineData) {
+      if (this.logLine.logLineData.type === "VARAS") return true;
     }
+    return false;
+  }
 
-    get DEBUG(){
-        if(this.type==='DEBUG') return true;
-        return false;
+  get DEBUG() {
+    if (this.logLine.logLineData) {
+      if (this.logLine.logLineData.type === "DEBUG") return true;
     }
+    return false;
+  }
 }

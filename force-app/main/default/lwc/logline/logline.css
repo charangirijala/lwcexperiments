@@ -1,8 +1,33 @@
-.slds-table_bordered{
-    border: none !important;
+.slds-table_bordered {
+  border: none !important;
 }
 
-.slds-table_bordered tbody td{
-    border-top:none !important;
-    border-bottom: 1px solid var(--slds-g-color-border-base-1, #e5e5e5);
+.slds-table_bordered tbody td {
+  border-top: none !important;
+  border-bottom: 1px solid var(--slds-g-color-border-base-1, #e5e5e5);
+}
+
+tbody tr:hover {
+  background-color: #2d2d2d !important;
+}
+.line-number {
+  width: 2rem;
+  color: #ccc !important;
+}
+
+.event-name {
+  width: 8rem;
+  color: #ccc !important;
+}
+
+.line-content {
+  color: white;
+}
+
+:host .THIS {
+  background-color: #2d2d2d;
+}
+table,
+table:hover {
+  background-color: #2d2d2d;
 }

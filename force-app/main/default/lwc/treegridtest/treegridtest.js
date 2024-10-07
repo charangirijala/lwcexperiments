@@ -831,9 +831,25 @@ const codeunits = [
   }
 ];
 
+class LogLine {
+  Id;
+  type;
+  logLineData;
+  name;
+  unitId;
+  constructor(type, data, name, unitid) {
+    this.Id = Math.floor(Math.random() * (99999 - 10000 + 1)) + 10000;
+    this.type = type;
+    this.logLineData = data;
+    this.name = name;
+    this.unitId = unitid;
+  }
+}
+
 export default class Treegridtest extends LightningElement {
   idLimitMin = IdBase;
   idLimitMax;
+  TreeNodeLogs = new Map();
   @track columns = columns;
   @track treeNodes = [];
   @track test = [
@@ -947,17 +963,48 @@ export default class Treegridtest extends LightningElement {
         );
         // console.log("Code unit captured", unit.codeUnit.codeUnitName);
         parent.children.push(res);
+        this.pushToTreeNodeLogs(parent.Id, null, "unit", res.Name, res.Id);
         this.getChildren(unit.codeUnit.executedLinesAndSubUnits, res);
       } else if (unit.methodUnit) {
         const res = new CUHierarchy(unit.methodUnit.methodName, "Method");
         // console.log("Method unit captured ", unit.methodUnit.methodName);
         parent.children.push(res);
+        this.pushToTreeNodeLogs(parent.Id, null, "unit", res.Name, res.Id);
         this.getChildren(unit.methodUnit.executedLinesAndSubUnits, res);
         // console.log("Child node res: ", res);
+      } else if (unit.logLine) {
+        // console.log("Log parentId", parent.Id);
+        this.pushToTreeNodeLogs(parent.Id, unit.logLine, "line", null, null);
       }
     });
   }
 
+  pushToTreeNodeLogs(parentId, data, type, name, unitId) {
+    if (this.TreeNodeLogs.has(parentId)) {
+      let logData = this.TreeNodeLogs.get(parentId);
+      if (type === "unit") {
+        const newLine = new LogLine(type, null, name, unitId);
+        logData.push(newLine);
+        this.TreeNodeLogs.set(parentId, logData);
+      } else if (type === "line") {
+        const newLine = new LogLine(type, data, null, null);
+        logData.push(newLine);
+        this.TreeNodeLogs.set(parentId, logData);
+      }
+    } else {
+      if (type === "line") {
+        const temp = [];
+        const newLine = new LogLine(type, data, null, null);
+        temp.push(newLine);
+        this.TreeNodeLogs.set(parentId, temp);
+      } else if (type === "unit") {
+        const temp = [];
+        const newLine = new LogLine(type, null, name, unitId);
+        temp.push(newLine);
+        this.TreeNodeLogs.set(parentId, temp);
+      }
+    }
+  }
   get treeNodeRenderer() {
     console.log("Getting latest verison");
     return this.treeNodes;

@@ -91,25 +91,30 @@
                   </button>
                 </template>
                 <div class="slds-truncate align-with-icon" title={node.name}>
-                  <button
-                    class="slds-button slds-text-body_small"
-                    data-unqid={node.Id}
-                    onclick={openLogViewer}
-                    tabindex="-1"
-                    title="Open Detailed View"
-                  >
-                    <template lwc:if={node.isSelected}>
-                      <svg
-                        class="slds-button__icon slds-button__icon_left"
-                        aria-hidden="true"
-                      >
-                        <use
-                          xlink:href="/assets/icons/utility-sprite/svg/symbols.svg#chevronright"
-                        ></use>
-                      </svg>
-                    </template>
+                  <template lwc:if={node.hasChild}>
+                    <button
+                      class="slds-button slds-text-body_small button-on-focus"
+                      data-unqid={node.Id}
+                      onclick={openLogViewer}
+                      tabindex="-1"
+                      title="Open Detailed View"
+                    >
+                      <template lwc:if={node.isSelected}>
+                        <svg
+                          class="slds-button__icon slds-button__icon_left"
+                          aria-hidden="true"
+                        >
+                          <use
+                            xlink:href="/assets/icons/utility-sprite/svg/symbols.svg#routing_offline"
+                          ></use>
+                        </svg>
+                      </template>
+                      <span class="font-monospace">{node.name}</span>
+                    </button>
+                  </template>
+                  <template lwc:else>
                     <span class="font-monospace">{node.name}</span>
-                  </button>
+                  </template>
                 </div>
               </th>
               <td data-label="Type" role="gridcell">
@@ -135,6 +140,7 @@
         logs-master-data={treeNodes}
         id-limit-min={idLimitMin}
         id-limit-max={idLimitMax}
+        log-lines-data={TreeNodeLogs}
       ></c-detailed-log-viewer>
     </div>
   </c-splitscreen>
