@@ -16,6 +16,7 @@
           variant="border-inverse"
           title="Close"
           onclick={closeLogViewer}
+          size="x-small"
         ></lightning-button-icon>
       </lightning-layout-item>
       <!-- Title and navigation btns -->
@@ -35,6 +36,7 @@
             title="back"
             onclick={handleBackward}
             disabled={lowerLimitReached}
+            size="x-small"
           ></lightning-button-icon>
           <h2
             class="slds-text-heading_small slds-show_inline-block heading slds-var-m-horizontal_small"
@@ -52,6 +54,7 @@
             title="Next CodeUnit"
             onclick={handleForward}
             disabled={upperLimitReached}
+            size="x-small"
           ></lightning-button-icon>
         </div>
       </lightning-layout-item>
@@ -70,15 +73,14 @@
             alternative-text="Full screen"
             variant="border-inverse"
             title="Full Screen"
+            size="x-small"
           ></lightning-button-icon>
         </div>
       </lightning-layout-item>
     </lightning-layout>
     <div class="logs-content">
       <template lwc:if={LogDataForId}>
-        <template for:each={LogDataForId} for:item="line">
-          <c-logline log-line={line} key={line.Id}></c-logline>
-        </template>
+        <c-log-line-wrapper log-data={LogDataForId}></c-log-line-wrapper>
       </template>
       <template lwc:else>Oops!! No Data for this unit</template>
     </div>

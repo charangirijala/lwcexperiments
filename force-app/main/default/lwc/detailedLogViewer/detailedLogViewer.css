@@ -1,11 +1,11 @@
 .log-container {
-  background-color: #2d2d2d;
+  /* background-color: #2d2d2d; */
   font-family: monospace;
-  color: rgb(145, 152, 161);
+  /* color: rgb(145, 152, 161); */
   height: 65vh;
 }
 
 .heading {
-  color: whitesmoke;
-  font-weight: bold;
+  /* color: whitesmoke; */
+  /* font-weight: bold; */
 }

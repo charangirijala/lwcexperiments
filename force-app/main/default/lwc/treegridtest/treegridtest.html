@@ -3,7 +3,7 @@
   <c-splitscreen>
     <div slot="left-content">
       <template for:each={test} for:item="t">
-        <div key={t.a}>{t.a} {t.b}</div>
+        <div key={t.a} class="slds-hide">{t.a} {t.b}</div>
       </template>
       <table
         aria-multiselectable="true"

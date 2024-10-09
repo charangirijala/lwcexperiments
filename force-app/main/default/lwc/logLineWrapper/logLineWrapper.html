@@ -1,0 +1,12 @@
+<template>
+  <table
+    class="slds-table slds-table_cell-buffer slds-table_bordered slds-table_col-bordered slds-table_striped"
+    aria-label="logline"
+  >
+    <tbody>
+      <template for:each={logData} for:item="line">
+        <c-logline log-line={line} key={line.Id}></c-logline>
+      </template>
+    </tbody>
+  </table>
+</template>
