@@ -1,118 +1,114 @@
 <template>
   <!-- VARIN -->
   <template lwc:if={VARIN}>
-    <tr class="slds-hint-parent">
-      <td class="slds-text-body_small slds-cell-wrap line-number">
-        <div class="slds-line-clamp" title={logLine.logLineData.lineNumber}>
-          {logLine.logLineData.lineNumber}
-        </div>
-      </td>
-      <td class="slds-text-body_small slds-cell-wrap event-name">
-        <div class={eventClassComb} title="Variable Initialized">
-          <em>Variable Initialized: </em>
-        </div>
-      </td>
-      <td class="slds-text-body_small slds-cell-wrap line-content">
-        <div class="slds-line-clamp" title={logLine.logLineData.varName}>
-          <span class="slds-text-font_monospace">
-            {logLine.logLineData.varType} {logLine.logLineData.varName};
-          </span>
-          <template lwc:if={logLine.logLineData.isVarStatic}>
-            <c-badge
-              value="Static"
-              margin-side="xxx-small"
-              type="slds-badge_inverse"
-            ></c-badge>
-          </template>
-          <template lwc:if={logLine.logLineData.isVarAccessible}
-            ><c-badge
-              value="Not Accessible"
-              margin-side="xxx-small"
-              type="slds-theme_error"
-            ></c-badge>
-          </template>
-        </div>
-      </td>
-    </tr>
+    <!-- <tr class="slds-hint-parent"> -->
+    <td class="slds-text-body_small slds-cell-wrap line-number">
+      <div class="slds-line-clamp" title={logLine.logLineData.lineNumber}>
+        {logLine.logLineData.lineNumber}
+      </div>
+    </td>
+    <td class="slds-text-body_small slds-cell-wrap event-name">
+      <div class={eventClassComb} title="Variable Initialized">
+        <em>Variable Initialized: </em>
+      </div>
+    </td>
+    <td class="slds-text-body_small slds-cell-wrap line-content">
+      <div class="slds-line-clamp" title={logLine.logLineData.varName}>
+        <span class="slds-text-font_monospace">
+          {logLine.logLineData.varType} {logLine.logLineData.varName};
+        </span>
+        <template lwc:if={logLine.logLineData.isVarStatic}>
+          <c-badge
+            value="Static"
+            margin-side="xxx-small"
+            type="slds-badge_inverse"
+          ></c-badge>
+        </template>
+        <template lwc:if={logLine.logLineData.isVarAccessible}
+          ><c-badge
+            value="Not Accessible"
+            margin-side="xxx-small"
+            type="slds-theme_error"
+          ></c-badge>
+        </template>
+      </div>
+    </td>
+    <!-- </tr> -->
   </template>
   <!-- VARAS -->
   <template lwc:if={VARAS}>
-    <tr class="slds-hint-parent">
-      <td class="slds-text-body_small slds-cell-wrap line-number">
-        <div class="slds-line-clamp" title={logLine.logLineData.lineNumber}>
-          {logLine.logLineData.lineNumber}
-        </div>
-      </td>
-      <td class="slds-text-body_small slds-cell-wrap event-name">
-        <div class={eventClassComb} title="Variable Assigned">
-          <em>Variable Assigned: </em>
-        </div>
-      </td>
-      <td class="slds-text-body_small slds-cell-wrap line-content">
-        <div class="slds-line-clamp" title={logLine.logLineData.varValue}>
-          <span class="slds-text-font_monospace">
-            {logLine.logLineData.varName} =
-            {logLine.logLineData.varValue};</span
-          >
-        </div>
-      </td>
-    </tr>
+    <!-- <tr class="slds-hint-parent"> -->
+    <td class="slds-text-body_small slds-cell-wrap line-number">
+      <div class="slds-line-clamp" title={logLine.logLineData.lineNumber}>
+        {logLine.logLineData.lineNumber}
+      </div>
+    </td>
+    <td class="slds-text-body_small slds-cell-wrap event-name">
+      <div class={eventClassComb} title="Variable Assigned">
+        <em>Variable Assigned: </em>
+      </div>
+    </td>
+    <td class="slds-text-body_small slds-cell-wrap line-content">
+      <div class="slds-line-clamp" title={logLine.logLineData.varValue}>
+        <span class="slds-text-font_monospace">
+          {logLine.logLineData.varName} = {logLine.logLineData.varValue};</span
+        >
+      </div>
+    </td>
+    <!-- </tr> -->
   </template>
   <!-- DEBUG -->
   <template lwc:if={DEBUG}>
-    <tr class="slds-hint-parent">
-      <td class="slds-text-body_small slds-cell-wrap line-number">
-        <div class="slds-line-clamp" title={logLine.logLineData.lineNumber}>
-          {logLine.logLineData.lineNumber}
-        </div>
-      </td>
-      <td class="slds-text-body_small slds-cell-wrap event-name">
-        <div class={eventClassComb} title="DEBUG Statement">
-          <em>DEBUG Statement: </em>
-        </div>
-      </td>
-      <td class="slds-text-body_small slds-cell-wrap line-content">
-        <div
-          class="slds-line-clamp"
-          title={logLine.logLineData.userDebugMessage}
+    <!-- <tr class="slds-hint-parent"> -->
+    <td class="slds-text-body_small slds-cell-wrap line-number">
+      <div class="slds-line-clamp" title={logLine.logLineData.lineNumber}>
+        {logLine.logLineData.lineNumber}
+      </div>
+    </td>
+    <td class="slds-text-body_small slds-cell-wrap event-name">
+      <div class={eventClassComb} title="DEBUG Statement">
+        <em>DEBUG Statement: </em>
+      </div>
+    </td>
+    <td class="slds-text-body_small slds-cell-wrap line-content">
+      <div class="slds-line-clamp" title={logLine.logLineData.userDebugMessage}>
+        <c-badge
+          value={logLine.logLineData.loggingLevel}
+          margin-side="xxx-small"
+          type="slds-badge_inverse"
+        ></c-badge>
+        <span class="slds-text-font_monospace"
+          >{logLine.logLineData.userDebugMessage}</span
         >
-          <c-badge
-            value={logLine.logLineData.loggingLevel}
-            margin-side="xxx-small"
-            type="slds-badge_inverse"
-          ></c-badge>
-          <span class="slds-text-font_monospace"
-            >{logLine.logLineData.userDebugMessage}</span
-          >
-        </div>
-      </td>
-    </tr>
+      </div>
+    </td>
+    <!-- </tr> -->
   </template>
   <!-- CODEUNIT -->
   <template lwc:if={CODEUNIT}>
-    <tr class="slds-hint-parent">
-      <td class="slds-text-body_small slds-cell-wrap line-number">
-        <div class="slds-line-clamp" title="LogLine">
-          {logLine.logLineData.lineNumber}
-        </div>
-      </td>
-      <td class="slds-text-body_small slds-cell-wrap event-name">
-        <div class={eventClassComb} title="LogLine">
-          <em>CODE UNIT</em>
-        </div>
-      </td>
-      <td class="slds-text-body_small slds-cell-wrap line-content">
-        <div class="slds-line-clamp" title="LogLine">
-          <c-badge
-            value={logLine.logLineData.loggingLevel}
-            margin-side="xxx-small"
-            type="slds-badge_inverse"
-          ></c-badge>
-          <span class="slds-text-font_monospace"
-            >{logLine.logLineData.userDebugMessage}</span
-          >
-        </div>
-      </td>
-    </tr>
+    <!-- <tr class="slds-hint-parent"> -->
+    <td class="slds-text-body_small slds-cell-wrap line-number">
+      <div class="slds-line-clamp" title="LogLine">
+        {logLine.logLineData.lineNumber}
+      </div>
+    </td>
+    <td class="slds-text-body_small slds-cell-wrap event-name">
+      <div class={eventClassComb} title="LogLine">
+        <em>CODE UNIT</em>
+      </div>
+    </td>
+    <td class="slds-text-body_small slds-cell-wrap line-content">
+      <div class="slds-line-clamp" title="LogLine">
+        <c-badge
+          value={logLine.logLineData.loggingLevel}
+          margin-side="xxx-small"
+          type="slds-badge_inverse"
+        ></c-badge>
+        <span class="slds-text-font_monospace"
+          >{logLine.logLineData.userDebugMessage}</span
+        >
+      </div>
+    </td>
+    <!-- </tr> -->
   </template>
 </template>

@@ -5,7 +5,9 @@
   >
     <tbody>
       <template for:each={logData} for:item="line">
-        <c-logline log-line={line} key={line.Id}></c-logline>
+        <tr class="slds-hint-parent" key={line.Id}>
+          <c-logline log-line={line} key={line.Id}></c-logline>
+        </tr>
       </template>
     </tbody>
   </table>
