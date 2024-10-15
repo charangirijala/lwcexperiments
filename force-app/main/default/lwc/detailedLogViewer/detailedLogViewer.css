@@ -5,7 +5,7 @@
   height: 65vh;
 }
 
-.heading {
-  /* color: whitesmoke; */
-  /* font-weight: bold; */
+.nav-bar {
+  background-color: rgb(22 50 92);
+  color: white;
 }
